@@ -6,7 +6,7 @@ using UnityEngine;
 public class RoomNodeGraphSO : ScriptableObject
 {
     [HideInInspector] public RoomNodeTypeListSO roomNodeTypeList;
-    [HideInInspector] public List<RoomNodeTypeListSO> roomNodeList=new List<RoomNodeTypeListSO>();
+    [HideInInspector] public List<RoomNodeSO> roomNodeList=new List<RoomNodeSO>();
     //The string in the dictionary represents GUID(globally unique identifier),also it is a struct.
     [HideInInspector] public Dictionary<string, RoomNodeSO> roomNodeDictionary = new Dictionary<string, RoomNodeSO>();
 
