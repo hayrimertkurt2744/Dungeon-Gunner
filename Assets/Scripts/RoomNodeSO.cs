@@ -91,12 +91,18 @@ public class RoomNodeSO : ScriptableObject
         }
     }
     private void ProcessMouseDownEvent(Event currentEvent)
-    {
+    {   //left click down
         if (currentEvent.button==0)
         {
             ProcessLeftClickDownEvent();
         }
+        //right click down
+        else if (currentEvent.button == 1)
+        {
+            ProcessRightClickDownEvent(currentEvent);
+        }
     }
+    //Process Left Click Down
     private void ProcessLeftClickDownEvent()
     {
         Selection.activeObject = this;
@@ -112,10 +118,18 @@ public class RoomNodeSO : ScriptableObject
             isSelected = true;
         }
     }
+    //Process Right Click Down
+    private void ProcessRightClickDownEvent(Event currentEvent)
+    {
+        roomNodeGraph.SetNodeToDrawConnectionLineFrom(this, currentEvent.mousePosition);
+    }
+
     private void ProcessMouseUpEvent(Event currentEvent)
     {
         if (currentEvent.button == 0)
         {
+
+
             ProcessLeftClickUpEvent();
         }
     }
@@ -145,6 +159,7 @@ public class RoomNodeSO : ScriptableObject
 
         GUI.changed = true;
     }
+    //Drag Node
     public void DragNode(Vector2 delta)
     {
         rect.position += delta;
@@ -152,6 +167,18 @@ public class RoomNodeSO : ScriptableObject
         //tells unity that something happend on this asset.So,save it.
     }
 
+    //Add childID to the node(returns true if the node has been added, false otherwise)
+    public bool AddChildRoomNodeIDToRoomNode(string childID)
+    {
+        childRoomNodeIDList.Add(childID);
+        return true;
+    }
+    //Add childID to the node(returns true if the node has been added, false otherwise)
+    public bool AddParentRoomNodeIDToRoomNode(string parentID)
+    {
+        parentRoomNodeIDList.Add(parentID);
+        return true;
+    }
 
 
 #endif
